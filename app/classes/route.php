@@ -63,7 +63,7 @@ class route
     private static function hasRoute()
     {
         if (self::$hasroute === false) {
-            header('location:404');
+            header('location:' . site_url('404));
         }
     }
 
