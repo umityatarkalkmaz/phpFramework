@@ -2,17 +2,17 @@
 
 class Model extends Database
 {
-    private string $sql;
-    private array $params = [];
+    protected string $sql;
+    protected array $params = [];
 
-    private function select($table): static
+    protected function select($table): static
     {
         $sql = 'SELECT * FROM ' . $table;
         $this->sql = $sql;
         return $this;
     }
 
-    private function where($column, $value): static
+    protected function where($column, $value): static
     {
         $sql = $this->sql . ' WHERE ' . $column . ' = ?';
         $this->sql = $sql;
@@ -20,7 +20,7 @@ class Model extends Database
         return $this;
     }
 
-    private function all(): bool|array
+    protected function all(): bool|array
     {
         $sql = $this->sql;
         $stmt = $this->db->prepare($sql);
@@ -28,7 +28,7 @@ class Model extends Database
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    private function sqlString(): string
+    protected function sqlString(): string
     {
         return $this->sql;
     }
